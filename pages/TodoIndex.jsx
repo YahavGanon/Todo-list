@@ -1,31 +1,32 @@
 import { todoService } from '../services/todo.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { TodoList } from '../cmps/TodoList.jsx'
+import { loadTodos, removeTodo, saveTodo } from '../store/actions/todo.actions.js'
 
 const { useState, useEffect } = React
+const { useSelector } = ReactRedux
 
 export function TodoIndex() {
-    const [todos, setTodos] = useState(null)
+    // const [_todos, setTodos] = useState(null)
+    const todos = useSelector(storeState => storeState.todos)
 
     useEffect(() => {
         loadTodos()
+            .catch(err => {
+                showErrorMsg('Cannot load Todos!')
+            })
     }, [])
 
-    function loadTodos() {
-        todoService.query().then(setTodos)
-    }
+    // function loadTodos() {
+    //     todoService.query().then(setTodos)
+    // }
 
     function onRemoveTodo(todoId) {
-        todoService
-            .remove(todoId)
+        removeTodo(todoId)
             .then(() => {
-                console.log('Deleted Succesfully!')
-                const todosToUpdate = todos.filter((todo) => todo._id !== todoId)
-                setTodos(todosToUpdate)
                 showSuccessMsg('Todo removed')
             })
             .catch((err) => {
-                console.log('Error from onRemoveTodo ->', err)
                 showErrorMsg('Cannot remove todo')
             })
     }
@@ -35,15 +36,11 @@ export function TodoIndex() {
             title: prompt('Todo title?'),
             severity: +prompt('Todo severity?'),
         }
-        todoService
-            .save(todo)
+        saveTodo(todo)
             .then((savedTodo) => {
-                console.log('Added Todo', savedTodo)
-                setTodos([...todos, savedTodo])
                 showSuccessMsg('Todo added')
             })
             .catch((err) => {
-                console.log('Error from onAddTodo ->', err)
                 showErrorMsg('Cannot add todo')
             })
     }
@@ -51,18 +48,12 @@ export function TodoIndex() {
     function onEditTodo(todo) {
         const severity = +prompt('New severity?')
         const todoToSave = { ...todo, severity }
-        todoService
-            .save(todoToSave)
-            .then((savedBug) => {
-                console.log('Updated Todo:', savedTodo)
-                const todosToUpdate = todos.map((currTodo) =>
-                    currTodo._id === savedTodos._id ? savedTodo : currTodo
-                )
-                setTodos(todosToUpdate)
+
+        saveTodo(todoToSave)
+            .then((savedTodo) => {
                 showSuccessMsg('Todo updated')
             })
             .catch((err) => {
-                console.log('Error from onEditTodo ->', err)
                 showErrorMsg('Cannot update todo')
             })
     }

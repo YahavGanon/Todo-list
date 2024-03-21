@@ -1,15 +1,16 @@
 body {
     max-width: 600px;
     margin: auto;
+    font-family: Poppins, Roboto, Helvetica, Arial, sans-serif;
 }
 
 header {
-    background-color: lightskyblue;
+    background-color: #6161FF;
     padding: 10px;
 }
 
 footer {
-    background-color: lightskyblue;
+    background-color: #6161FF;
     padding: 5px;
     margin: 10px 0;
     text-align: center;
@@ -21,6 +22,7 @@ nav a {
     padding: 10px;
     border-bottom: 1px solid transparent;
     text-decoration: none;
+    color:whitesmoke;
 }
 
 nav a:hover {
@@ -83,4 +85,35 @@ nav a:hover {
 
 .bug-preview span {
     color: gold;
+}
+
+.footer-todos {
+    display: flex;
+    justify-content: space-between;
+}
+
+.todos-num {
+    line-height: 3.4;
+    margin: 0;
+}
+
+.entry-title{
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-weight: 300;
+    font-weight: 600;
+    font-size: 60px;
+    line-height: 100%;
+}
+
+.logo-img{
+    width:2.5em
+}
+
+.wensday-img{
+    width:10em;
+}
+
+button{
+    background-color: #6161FF;
 }

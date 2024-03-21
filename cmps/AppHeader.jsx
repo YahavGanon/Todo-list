@@ -33,7 +33,12 @@ export function AppHeader() {
         <NavLink to="/">Home</NavLink> |<NavLink to="/todo">Todos</NavLink> |
         <NavLink to="/about">About</NavLink>
       </nav>
-      <h1>Todos app</h1>
+      <div className='entry'>
+      <img className='logo-img' src="assets/img/monday-logoo.png" alt="" />
+      <img className='wensday-img' src="assets/img/wensday.png" alt="" />
+
+      {/* <h1 className='entry-title'> Sunday</h1> */}
+      </div>
 
       {user ? (
         <section>
