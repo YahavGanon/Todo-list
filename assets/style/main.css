@@ -117,3 +117,27 @@ nav a:hover {
 button{
     background-color: #6161FF;
 }
+
+.user-details{
+    text-decoration: none;
+    color: whitesmoke;
+    font-family: Poppins, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+}
+
+.user-card-img{
+    width:3em;
+}
+
+.user-card{
+    display: flex;
+    flex-direction: column;
+}
+
+.done{
+    color: #555;
+    text-decoration: line-through;
+}
+
+.not-done{
+    text-decoration: none;
+}

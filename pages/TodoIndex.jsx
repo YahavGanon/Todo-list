@@ -7,7 +7,6 @@ const { useState, useEffect } = React
 const { useSelector } = ReactRedux
 
 export function TodoIndex() {
-    // const [_todos, setTodos] = useState(null)
     const todos = useSelector(storeState => storeState.todos)
 
     useEffect(() => {
@@ -16,10 +15,6 @@ export function TodoIndex() {
                 showErrorMsg('Cannot load Todos!')
             })
     }, [])
-
-    // function loadTodos() {
-    //     todoService.query().then(setTodos)
-    // }
 
     function onRemoveTodo(todoId) {
         removeTodo(todoId)
@@ -35,6 +30,7 @@ export function TodoIndex() {
         const todo = {
             title: prompt('Todo title?'),
             severity: +prompt('Todo severity?'),
+            isDone: false
         }
         saveTodo(todo)
             .then((savedTodo) => {
@@ -57,6 +53,10 @@ export function TodoIndex() {
                 showErrorMsg('Cannot update todo')
             })
     }
+
+    // function onDoneTodo(){
+        
+    // }
 
     return (
         <main>

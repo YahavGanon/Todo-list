@@ -38,5 +38,4 @@ export function saveTodo(todo) {
             console.log('todo action -> Cannot save todo', err)
             throw err
         })
-
 }

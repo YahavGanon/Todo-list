@@ -1,20 +1,24 @@
 import { LoginSignup } from './LoginSignup.jsx';
 import { userService } from '../services/user.service.js';
 
-const { NavLink } = ReactRouterDOM
+const { Link, NavLink } = ReactRouterDOM
 const { useState, useEffect } = React
+const { useSelector } = ReactRedux
 const { useNavigate } = ReactRouter;
 
 import { UserMsg } from './UserMsg.jsx'
+import { logout } from '../store/actions/user.actions.js';
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 
 export function AppHeader() {
   const navigate = useNavigate()
-  const [user, setUser] = useState(userService.getLoggedinUser())
+  // const [user, setUser] = useState(userService.getLoggedinUser())
+const user = useSelector(storeState=>storeState.loggedInUser)
 
   function onLogout() {
-    userService.logout()
+    logout()
       .then(() => {
-        onSetUser(null)
+        showSuccessMsg('Logout successfully')
       })
       .catch((err) => {
         showErrorMsg('OOPs try again')
@@ -36,15 +40,13 @@ export function AppHeader() {
       <div className='entry'>
       <img className='logo-img' src="assets/img/monday-logoo.png" alt="" />
       <img className='wensday-img' src="assets/img/wensday.png" alt="" />
-
-      {/* <h1 className='entry-title'> Sunday</h1> */}
       </div>
 
       {user ? (
         <section>
-          <span to={`/user/${user._id}`}>
-            Hello {user.fullname} 🍌<span></span>
-          </span>
+          <Link className="user-details" to={`/user/${user._id}`}>
+            Hello {user.fullname} 🍌
+          </Link>
           <button onClick={onLogout}>Logout</button>
         </section>
       ) : (

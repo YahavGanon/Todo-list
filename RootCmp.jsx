@@ -10,6 +10,8 @@ import { TodoIndex } from './pages/TodoIndex.jsx'
 import { TodoDetails } from './pages/TodoDetails.jsx'
 import { AboutUs } from './pages/AboutUs.jsx'
 import { store } from './store/store.js'
+import { UserInfo } from './pages/UserInfo.jsx'
+
 
 export function App() {
     return (
@@ -23,6 +25,7 @@ export function App() {
                             <Route path="/todo" element={<TodoIndex />} />
                             <Route path="/todo/:todoId" element={<TodoDetails />} />
                             <Route path="/about" element={<AboutUs />} />
+                            <Route path="/user/:userId" element={<UserInfo />} />
                         </Routes>
                     </main>
                     <AppFooter />
