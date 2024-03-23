@@ -13,7 +13,7 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 export function AppHeader() {
   const navigate = useNavigate()
   // const [user, setUser] = useState(userService.getLoggedinUser())
-const user = useSelector(storeState=>storeState.loggedInUser)
+  const user = useSelector(storeState => storeState.loggedInUser)
 
   function onLogout() {
     logout()
@@ -38,8 +38,8 @@ const user = useSelector(storeState=>storeState.loggedInUser)
         <NavLink to="/about">About</NavLink>
       </nav>
       <div className='entry'>
-      <img className='logo-img' src="assets/img/monday-logoo.png" alt="" />
-      <img className='wensday-img' src="assets/img/wensday.png" alt="" />
+        <img className='logo-img' src="assets/img/monday-logoo.png" alt="" />
+        <img className='wensday-img' src="assets/img/wensday.png" alt="" />
       </div>
 
       {user ? (
@@ -52,7 +52,6 @@ const user = useSelector(storeState=>storeState.loggedInUser)
       ) : (
         <section>
           <LoginSignup onSetUser={onSetUser} />
-
         </section>
       )}
       <UserMsg />

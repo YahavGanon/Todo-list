@@ -10,7 +10,10 @@ export const userService = {
     getById,
     getLoggedinUser,
     updateScore,
-    getEmptyCredentials
+    getEmptyCredentials,
+    _setLoggedinUser,
+    upadateUser,
+
 }
 
 
@@ -70,6 +73,19 @@ function getEmptyCredentials() {
         password: '',
         fullname: ''
     }
+}
+
+function upadateUser(_user){
+    const loggedInUserId = _user._id
+    return userService.getById(loggedInUserId)
+        .then(user => {
+            user = _user
+            return storageService.put(STORAGE_KEY, user)
+        })
+        .then(user => {
+            _setLoggedinUser(user)
+            return user.score
+        })
 }
 
 

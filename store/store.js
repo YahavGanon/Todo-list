@@ -12,12 +12,17 @@ export const IS_DONE = 'IS_DONE'
 
 //user
 export const SET_USER = 'SET_USER'
+export const UPDATE_USER = 'UPDATE_USER'
+export const UPDATE_PROGRESS = 'UPDATE_PROGRESS'
+
 
 
 const initialState = {
     todos: [],
     loggedInUser: userService.getLoggedinUser(),
-    isDone: false
+    isDone: false,
+    users: [],
+    progress: 0,
 }
 
 export function appReducer(state = initialState, action = {}) {
@@ -35,8 +40,12 @@ export function appReducer(state = initialState, action = {}) {
         case UPDATE_TODO:
             return { ...state, todos: state.todos.map(todo => todo._id !== action.todo._Id ? todo : action.todo) }
 
-            case IS_DONE:
+        case IS_DONE:
             return { ...state, isDone: !state.isDone }
+
+        case UPDATE_PROGRESS:
+            return { ...state, progress: action.progress}
+
 
         // user
         case SET_USER:
@@ -44,6 +53,9 @@ export function appReducer(state = initialState, action = {}) {
                 ...state,
                 loggedInUser: action.user
             }
+        case UPDATE_USER:
+            // return { ...state, users: state.users.map(user => user._id !== action.user._Id ? user : action.user) }
+            return { ...state, users: state.users.map(user => user._id !== action.user._id ? user : action.user) };
 
         default:
             return state;

@@ -1,6 +1,8 @@
 
 import { storageService } from './async-storage.service.js'
+import { userService } from './user.service.js'
 import { utilService } from './util.service.js'
+
 
 const STORAGE_KEY = 'todoDB'
 
@@ -29,34 +31,32 @@ function save(todo) {
     if (todo._id) {
         return storageService.put(STORAGE_KEY, todo)
     } else {
+        todo.owner = userService.getLoggedinUser()
         return storageService.post(STORAGE_KEY, todo)
     }
 }
-
-
-
 
 function _createTodos() {
     let todos = utilService.loadFromStorage(STORAGE_KEY)
     if (!todos || !todos.length) {
         todos = [
             {
-                title: "Infinite Loop Detected",
+                title: "To wash the dishes",
                 severity: 4,
                 _id: "1NF1N1T3"
             },
             {
-                title: "Keyboard Not Found",
+                title: "To fix the computer",
                 severity: 3,
                 _id: "K3YB0RD"
             },
             {
-                title: "404 Coffee Not Found",
+                title: "To take the dog out",
                 severity: 2,
                 _id: "C0FF33"
             },
             {
-                title: "Unexpected Response",
+                title: "To finish homework",
                 severity: 1,
                 _id: "G0053"
             }

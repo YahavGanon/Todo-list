@@ -1,17 +1,21 @@
 import { todoService } from "../services/todo.service.js"
-const {useSelector} = ReactRedux
+import { UPDATE_PROGRESS } from "../store/store.js"
+const {useSelector, useDispatch} = ReactRedux
 const { useState } = React
+
 
 
 export function TodoPreview({ todo }) {
     const [isDone, setIsDone] = useState(todo.isDone)
+    const dispatch = useDispatch()
     // const isDone = useSelector(storeState => storeState.isDone)
     const dynClass = isDone ? 'done' : 'not-done'
 
     function onFinishTodo() {
         setIsDone(!isDone)
         todo.isDone = !todo.isDone
-
+        // const sum = todo.isDone ? + 1 : 0
+        // dispatch({type: UPDATE_PROGRESS, progress: sum})
         todoService.save(todo)
             .then(console.log('saved successfully!'))
             .catch(console.error('Couldnt save successfully'))

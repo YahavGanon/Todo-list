@@ -54,10 +54,6 @@ export function TodoIndex() {
             })
     }
 
-    // function onDoneTodo(){
-        
-    // }
-
     return (
         <main>
             <h3>Todos App</h3>

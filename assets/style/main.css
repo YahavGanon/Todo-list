@@ -141,3 +141,16 @@ button{
 .not-done{
     text-decoration: none;
 }
+
+.user-pref{
+    display: flex;
+    gap: 1em;
+    margin-top: 1em;
+    background-color: rgb(198, 198, 198);
+    justify-content: space-between;
+}
+
+.progress-bar {
+    margin-left: 1em;
+    margin-top: 1em;
+}
