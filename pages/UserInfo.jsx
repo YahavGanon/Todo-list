@@ -1,7 +1,7 @@
 import { loadTodos, removeTodo, saveTodo } from '../store/actions/todo.actions.js'
 import { TodoPreview } from '../cmps/TodoPreview.jsx'
 import { userService } from '../services/user.service.js'
-import { updateUser } from '../store/actions/user.actions.js'
+import { updateUser, login } from '../store/actions/user.actions.js'
 
 
 
@@ -13,7 +13,6 @@ export function UserInfo() {
     const todos = useSelector(storeState => storeState.todos)
     const [credentials, setCredentials] = useState({ fullname: '' })
     const [color, setColor] = useState({ colorTxt: '#000000', bgColor: '#000000' })
-    console.log('colorrrrr!', color)
     const _user = useSelector(storeState => storeState.loggedInUser)
 
 
@@ -39,6 +38,7 @@ export function UserInfo() {
             color: color.colorTxt,
             fullname: credentials.fullname
         }
+        login(updatedUser)
 
         userService.upadateUser(updatedUser)
     }

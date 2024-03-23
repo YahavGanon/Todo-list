@@ -13,7 +13,6 @@ export function AppFooter() {
     }, [todos, progress])
 
     function updateProgressBar() {
-        console.log('shaayyyyy')
         let sum = todos.filter((todo) => todo.isDone).length
         dispatch({ type: UPDATE_PROGRESS, progress: sum })
     }

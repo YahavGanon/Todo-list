@@ -12,7 +12,6 @@ export function LoginSignup({ onSetUser }) {
 
     function handleChange({ target }) {
         const { name: field, value } = target
-        console.log(field, value)
         setCredentials(prevCreds => ({ ...prevCreds, [field]: value }))
     }
 

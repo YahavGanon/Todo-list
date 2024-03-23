@@ -1,5 +1,6 @@
 import { todoService } from "../services/todo.service.js"
-import { UPDATE_PROGRESS } from "../store/store.js"
+import { saveTodo } from "../store/actions/todo.actions.js"
+
 const {useSelector, useDispatch} = ReactRedux
 const { useState } = React
 
@@ -14,8 +15,7 @@ export function TodoPreview({ todo }) {
     function onFinishTodo() {
         setIsDone(!isDone)
         todo.isDone = !todo.isDone
-        // const sum = todo.isDone ? + 1 : 0
-        // dispatch({type: UPDATE_PROGRESS, progress: sum})
+        saveTodo(todo)
         todoService.save(todo)
             .then(console.log('saved successfully!'))
             .catch(console.error('Couldnt save successfully'))
@@ -24,7 +24,7 @@ export function TodoPreview({ todo }) {
     return <article>
         <h4 className={`${dynClass}`}>{todo.title}</h4>
         <h1>📃</h1>
-        <p>Severity: <span>{todo.severity}</span></p>
+        <p>Importance: <span>{todo.severity}</span></p>
         <button onClick={onFinishTodo}>Done</button>
     </article>
 }

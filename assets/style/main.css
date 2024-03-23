@@ -154,3 +154,28 @@ button{
     margin-left: 1em;
     margin-top: 1em;
 }
+
+.todo-actions{
+    display: flex;
+    gap: 1em;
+}
+
+.images{
+    display: flex;
+    gap: 1em;
+}
+
+.images img{
+    width:4em;
+}
+
+.img-welcome{
+    width:80%
+}
+
+.welcome{
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    place-items: center;
+}

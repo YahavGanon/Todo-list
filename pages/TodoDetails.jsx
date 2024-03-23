@@ -24,7 +24,7 @@ export function TodoDetails() {
     return todo && <div>
         <h3>Todo Details 📃</h3>
         <h4>{todo.title}</h4>
-        <p>Severity: <span>{todo.severity}</span></p>
+        <p>Importance: <span>{todo.severity}</span></p>
         <Link to="/todo">Back to List</Link>
     </div>
 
