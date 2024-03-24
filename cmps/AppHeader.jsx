@@ -1,10 +1,8 @@
 import { LoginSignup } from './LoginSignup.jsx';
-import { userService } from '../services/user.service.js';
 
 const { Link, NavLink } = ReactRouterDOM
-const { useState, useEffect } = React
 const { useSelector } = ReactRedux
-const { useNavigate } = ReactRouter;
+const { useNavigate } = ReactRouter
 
 import { UserMsg } from './UserMsg.jsx'
 import { logout } from '../store/actions/user.actions.js';
@@ -54,7 +52,6 @@ export function AppHeader() {
         </section>
       )}
       <UserMsg />
-
     </header>
   )
 }

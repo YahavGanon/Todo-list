@@ -4,6 +4,7 @@ import { userService } from './user.service.js'
 import { utilService } from './util.service.js'
 
 
+const PAGE_SIZE = 7
 const STORAGE_KEY = 'todoDB'
 
 _createTodos()
@@ -16,21 +17,39 @@ export const todoService = {
     getDefaultFilter
 }
 
-function query(filterBy = {}) {
+// function query(filterBy = {}) {
+//     return storageService.query(STORAGE_KEY)
+//         .then(todos => {
+//             if (!filterBy.txt) filterBy.txt = ''
+
+//             // if(!filterBy.isDone) return todos
+//             // if (filterBy.isDone) {
+//             //     return todos.filter(todo => todo.isDone === false)
+//             // }
+            
+//             const regExp = new RegExp(filterBy.txt, 'i')
+//             return todos.filter(todo =>
+//                 regExp.test(todo.title)
+//             )
+
+//         })
+// }
+
+function query(filterBy = { txt: '', isDone: 'all', pageIdx: 0}) {
     return storageService.query(STORAGE_KEY)
         .then(todos => {
-            if (!filterBy.txt) filterBy.txt = ''
-
-            // if(!filterBy.isDone) return todos
-            // if (filterBy.isDone) {
-            //     return todos.filter(todo => todo.isDone === false)
-            // }
-            
-            const regExp = new RegExp(filterBy.txt, 'i')
-            return todos.filter(todo =>
-                regExp.test(todo.title)
-            )
-
+            if (filterBy.txt) {
+                const regex = new RegExp(filterBy.txt, 'i')
+                todos = todos.filter(todo => regex.test(todo.title))
+            }
+            if (filterBy.isDone !== 'all') {
+                todos = todos.filter((todo) => (filterBy.isDone === 'done' ? todo.isDone : !todo.isDone))
+            }
+            if (filterBy.pageIdx !== undefined) {
+                const startIdx = filterBy.pageIdx * PAGE_SIZE
+                todos = todos.slice(startIdx, PAGE_SIZE + startIdx)
+            }
+            return todos
         })
 }
 
@@ -85,5 +104,5 @@ function _createTodos() {
 }
 
 function getDefaultFilter() {
-    return { txt: '', isDone: ''}
+    return { txt: '', isDone: 'all', pageIdx: 0}
 }
