@@ -1,3 +1,9 @@
 .center{
     text-align: center;
 }
+
+.loading-img{
+    display: flex;
+    place-items: center;
+    place-content: center;
+}

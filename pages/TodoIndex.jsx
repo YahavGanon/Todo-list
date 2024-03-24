@@ -1,25 +1,26 @@
 import { todoService } from '../services/todo.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { TodoList } from '../cmps/TodoList.jsx'
-import { loadTodos, removeTodo, saveTodo } from '../store/actions/todo.actions.js'
+import { loadTodos, removeTodo, saveTodo, setFilterBy } from '../store/actions/todo.actions.js'
 import { TodoFilter } from '../cmps/TodoFilter.jsx'
 
 const { useState, useEffect } = React
 const { useSelector } = ReactRedux
 
 export function TodoIndex() {
-    const todos = useSelector(storeState => storeState.todos)
-    const [filterBy, setFilterBy] = useState(todoService.getDefaultFilter())
+    const todos = useSelector(storeState => storeState.todoModule.todos)
+    const filterBy = useSelector(storeState => storeState.todoModule.filterBy)
+    const isLoading = useSelector(storeState => storeState.todoModule.isLoading)
 
     useEffect(() => {
-        loadTodos(filterBy)
+        loadTodos()
             .catch(err => {
                 showErrorMsg('Cannot load Todos!')
             })
     }, [filterBy])
 
     function onSetFilter(filterBy) {
-        setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
+        setFilterBy(filterBy)
     }
 
     function onRemoveTodo(todoId) {
@@ -65,10 +66,13 @@ export function TodoIndex() {
             <h3>Todos App</h3>
             <main>
                 <div className='todo-actions'>
-                <button onClick={onAddTodo}>Add Todo ⛐</button>
-                <TodoFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+                    <button onClick={onAddTodo}>Add Todo ⛐</button>
+                    <TodoFilter filterBy={filterBy} onSetFilter={onSetFilter} />
                 </div>
-                <TodoList todos={todos} onRemoveTodo={onRemoveTodo} onEditTodo={onEditTodo} />
+                {!isLoading 
+                ? <TodoList todos={todos} onRemoveTodo={onRemoveTodo} onEditTodo={onEditTodo} />
+                : <img className="loading-img" src="assets/img/Loading_icon.gif" alt="" />
+                }
             </main>
         </main>
     )

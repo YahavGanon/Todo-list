@@ -12,8 +12,7 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 
 export function AppHeader() {
   const navigate = useNavigate()
-  // const [user, setUser] = useState(userService.getLoggedinUser())
-  const user = useSelector(storeState => storeState.loggedInUser)
+  const user = useSelector(storeState => storeState.userModule.loggedInUser)
 
   function onLogout() {
     logout()

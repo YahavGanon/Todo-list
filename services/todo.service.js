@@ -20,10 +20,12 @@ function query(filterBy = {}) {
     return storageService.query(STORAGE_KEY)
         .then(todos => {
             if (!filterBy.txt) filterBy.txt = ''
-            // if(filterBy.isDone === 'true') return todos
+
+            // if(!filterBy.isDone) return todos
             // if (filterBy.isDone) {
             //     return todos.filter(todo => todo.isDone === false)
             // }
+            
             const regExp = new RegExp(filterBy.txt, 'i')
             return todos.filter(todo =>
                 regExp.test(todo.title)

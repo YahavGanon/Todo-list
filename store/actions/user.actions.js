@@ -1,5 +1,6 @@
 import { userService } from "../../services/user.service.js"
-import { SET_USER, UPDATE_USER, store } from "../store.js"
+import { SET_USER, UPDATE_USER } from "../reducers/user.reducer.js"
+import { store } from "../store.js"
 
 export function login(credentials) {
     return userService.login(credentials)

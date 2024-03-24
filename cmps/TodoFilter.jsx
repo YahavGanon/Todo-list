@@ -6,7 +6,9 @@ export function TodoFilter({ filterBy, onSetFilter }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
     onSetFilter = useRef(utilService.debounce(onSetFilter, 500))
-    const [done, setDone] = useState(false)
+    // const [done, setDone] = useState(false)
+
+    // let dynValue = done ? 'dones' : ''
 
     useEffect(() => {
         onSetFilter.current(filterByToEdit)
@@ -15,9 +17,9 @@ export function TodoFilter({ filterBy, onSetFilter }) {
     function handleChange({ target }) {
         let { value, name: field, type } = target
 
-        if(field === 'isDone'){
-            setDone(!done)
-        }
+        // if(field === 'isDone'){
+        //     setDone(!done)
+        // }
         value = type === 'number' ? +value : value
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
@@ -34,7 +36,7 @@ export function TodoFilter({ filterBy, onSetFilter }) {
             />
             {/* <label htmlFor="finishedTodos"></label>
             <input type="checkbox" name="isDone" id="finishedTodos"
-              value={done} onChange={handleChange}/> */}
+              value={dynValue} onChange={handleChange}/> */}
 
 
         </form>

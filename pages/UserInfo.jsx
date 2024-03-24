@@ -10,10 +10,10 @@ const { useSelector } = ReactRedux
 const { Link } = ReactRouterDOM
 
 export function UserInfo() {
-    const todos = useSelector(storeState => storeState.todos)
+    const todos = useSelector(storeState => storeState.todoModule.todos)
     const [credentials, setCredentials] = useState({ fullname: '' })
     const [color, setColor] = useState({ colorTxt: '#000000', bgColor: '#000000' })
-    const _user = useSelector(storeState => storeState.loggedInUser)
+    const _user = useSelector(storeState => storeState.userModule.loggedInUser)
 
 
     function onChangeInput({ target }) {
