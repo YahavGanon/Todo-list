@@ -69,9 +69,9 @@ export function TodoIndex() {
                     <button onClick={onAddTodo}>Add Todo ⛐</button>
                     <TodoFilter filterBy={filterBy} onSetFilter={onSetFilter} />
                 </div>
-                {!isLoading 
-                ? <TodoList todos={todos} onRemoveTodo={onRemoveTodo} onEditTodo={onEditTodo} />
-                : <img className="loading-img" src="assets/img/Loading_icon.gif" alt="" />
+                {!isLoading
+                    ? <TodoList todos={todos} onRemoveTodo={onRemoveTodo} onEditTodo={onEditTodo} />
+                    : <img className="loading-img" src="assets/img/Loading_icon.gif" alt="" />
                 }
             </main>
         </main>

@@ -33,7 +33,7 @@ export function todoReducer(state = initialState, action = {}) {
             return { ...state, todos: [...state.todos, action.todo] }
 
         case UPDATE_TODO:
-            return { ...state, todos: state.todos.map(todo => todo._id !== action.todo._Id ? todo : action.todo) }
+            return { ...state, todos: state.todos.map(todo => todo._id === action.todo._id ? action.todo : todo) }
 
         case IS_DONE:
             return { ...state, isDone: !state.isDone }

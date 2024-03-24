@@ -1,6 +1,7 @@
 import { todoService } from "../../services/todo.service.js";
 import { ADD_TODO, REMOVE_TODO, SET_FILTER_BY, SET_IS_LOADING, SET_TODOS, UPDATE_TODO } from "../reducers/todo.reducer.js";
 import { store } from "../store.js"
+
 export function loadTodos() {
     const filterBy = store.getState().todoModule.filterBy
     store.dispatch({ type: SET_IS_LOADING, isLoading: true })
@@ -12,7 +13,7 @@ export function loadTodos() {
             throw err
         })
         .finally(() => {
-            store.dispatch({type: SET_IS_LOADING, isLoading: false})
+            store.dispatch({ type: SET_IS_LOADING, isLoading: false })
         })
 }
 
@@ -35,7 +36,7 @@ export function saveTodo(todo) {
     const type = todo._id ? UPDATE_TODO : ADD_TODO
     return todoService.save(todo)
         .then((savedTodo) => {
-            store.dispatch({ type, todo: todo })
+            store.dispatch({ type, todo: savedTodo })
             return savedTodo
         })
         .catch(err => {
